@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d15b7a955bb2c46adf7325e156c4a0, type: 3}
+  m_Name: BasicCatalog
+  m_EditorClassIdentifier: Assembly-CSharp::Horkedai.GarageKit2D.TuningCatalogSO
+  items:
+  - {fileID: 11400000, guid: b5876e39397ba2c47bce1bfced0aaf53, type: 2}
+  - {fileID: 11400000, guid: f7910c3ab6ff08a4e84ebd785c781f07, type: 2}
+  - {fileID: 11400000, guid: c61a2fae50894444a87fd9526c95d5b6, type: 2}
+  - {fileID: 11400000, guid: 04ccca35127584a438e0f0ecbda79b83, type: 2}
+  - {fileID: 11400000, guid: 5c843eebab8407044a445540c179a7c3, type: 2}
+  - {fileID: 11400000, guid: c32a647e6e6f1d345a8cc197cd2ea9f4, type: 2}
+  - {fileID: 11400000, guid: f9cc7017143c6e9429f11d116231aa69, type: 2}
+  - {fileID: 11400000, guid: 9840b4b8d62183f4f9ca1d7c583d4292, type: 2}
+  - {fileID: 11400000, guid: be2ff5da8486e2b48b1d87348ab53278, type: 2}
+  - {fileID: 11400000, guid: 1a20470bb13cf36419b3c00da999cf4d, type: 2}
+  - {fileID: 11400000, guid: 069c9181ac07b664b94a8c3f8ce06c20, type: 2}
+  - {fileID: 11400000, guid: 56e61d851b94cc24cb4d86f3bcf7f677, type: 2}
+  - {fileID: 11400000, guid: e49ceb67c704d7f488dac4f5886cc6d2, type: 2}
+  - {fileID: 11400000, guid: 6af547bede6b1f84999809cd143af99f, type: 2}
+  - {fileID: 11400000, guid: a3a3492de268f7c408c359b67289cb1a, type: 2}
+  - {fileID: 11400000, guid: 987cecaa3467c0947ab4050db4fb81a3, type: 2}
+  - {fileID: 0}
