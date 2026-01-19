@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 
+[Serializable]
 public class ItemInstance
 {
     public string instanceId; // unique id for this instance
@@ -35,5 +37,14 @@ public class ItemInstance
     public bool IsEquipped()
     {
         return !string.IsNullOrWhiteSpace(equippedTo);
+    }
+
+    public void Equip(string vehicleId)
+    {
+        equippedTo = vehicleId;
+    }
+    public void Unequip()
+    {
+        equippedTo = null;
     }
 }
