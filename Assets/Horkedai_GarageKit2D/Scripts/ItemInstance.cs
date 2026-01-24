@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 
+
+
 [Serializable]
 public class ItemInstance
 {
@@ -10,8 +12,7 @@ public class ItemInstance
 
     public int durability; // current durability
 
-    public string equippedTo; // vehicleId this item is equipped to, null if in inventory
-
+    public string equippedTo; // the bike this item is equipped to
     public int cost; // purchase cost
     public int estCost; // estimated resale cost
 
@@ -25,6 +26,7 @@ public class ItemInstance
     {
         instanceId = System.Guid.NewGuid().ToString();
         itemId = item.itemId;
+        slotId = item.slotId;
         durability = newDurability;
         cost = item.cost;
     }

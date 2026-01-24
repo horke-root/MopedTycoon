@@ -11,17 +11,30 @@ public class PlayerData
     
     public bool defaultSetted = false;
 
+    public int currentBike; // number in counts of items in bikes List [like 1 or 0 or mayeb 13]
+
+    public List<BikeData> bikes;
+
     public PlayerData(int money = 100, int level = 1)
     {
         this.money = money;
         this.level = level;
         ownedItems = new List<ItemInstance>();
+        currentBike = 0;
+        bikes = new List<BikeData>();
     }
 
     public void Add(ItemInstance item)
     {
         ownedItems.Add(item);   
+    
     }
+
+    public BikeData GetCurrentBike()
+    {
+        return bikes[currentBike];
+    }
+
 
     /*public List<ItemInstance> GetItems(TuningCatalogSO catalog)
     {
