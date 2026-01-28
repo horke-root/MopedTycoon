@@ -13,4 +13,5 @@ public class DefaultLoadoutSO : ScriptableObject
     }
 
     public List<DefaultSlot> slots = new List<DefaultSlot>();
+    public BikeSO defaultBikeSO;
 }

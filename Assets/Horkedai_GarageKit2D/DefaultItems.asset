@@ -27,3 +27,4 @@ MonoBehaviour:
     itemId: engine50
   - slotId: seat
     itemId: seatD
+  defaultBikeSO: {fileID: 11400000, guid: c4397ecabd38ac740ae007a55502f1a4, type: 2}

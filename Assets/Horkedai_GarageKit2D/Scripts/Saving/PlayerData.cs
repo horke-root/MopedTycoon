@@ -24,15 +24,29 @@ public class PlayerData
         bikes = new List<BikeData>();
     }
 
-    public void Add(ItemInstance item)
+    public void AddItem(ItemInstance item)
     {
         ownedItems.Add(item);   
     
+    }
+    public void AddBike(BikeData bike)
+    {
+        bikes.Add(bike);
     }
 
     public BikeData GetCurrentBike()
     {
         return bikes[currentBike];
+    }
+
+    public void EquipItem(ItemInstance item,  BikeVisual visual, BikeData bike = null)
+    {
+        if (bike == null)
+        {
+            bike = GetCurrentBike();
+        }
+        item.Equip(bike.bikeId);
+        visual.EquipItem(item);
     }
 
 

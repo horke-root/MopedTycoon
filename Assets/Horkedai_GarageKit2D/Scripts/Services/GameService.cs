@@ -18,4 +18,5 @@ public class GameService : MonoBehaviour
 
     //Code:
     public TuningCatalogSO catalog;
+    public BikeVisual bikeVisual;
 }
