@@ -45,21 +45,33 @@ public class BikeVisual : MonoBehaviour
 
     public void EquipItem(ItemInstance item)
     {
-       string itemSlot = item.slotId;
-       SpriteRenderer sp = new SpriteRenderer();
-       //SpriteRenderer sp = slotRenderers[itemSlot];
-       foreach (var s in slotRenderers)
+        SpriteRenderer sp = FindSlotRenderer(item);
+        Debug.Log(GameService.Instance.catalog.Get(item.itemId).itemId + " = cat");
+        sp.sprite = GameService.Instance.catalog.Get(item.itemId).itemSprite;
+    }
+
+    public void UnequipItem(ItemInstance item)
+    {
+        SpriteRenderer sp = FindSlotRenderer(item);
+        sp.sprite = null;
+    }
+
+    private SpriteRenderer FindSlotRenderer(ItemInstance item)
+    {
+        string itemSlot = item.slotId;
+        SpriteRenderer sp = new SpriteRenderer();
+        //SpriteRenderer sp = slotRenderers[itemSlot];
+        foreach (var s in slotRenderers)
         {
             Debug.Log(s);
             if (s.Key == itemSlot)
             {
                 sp = s.Value;
-                Debug.Log(item.itemId + " equpied");
+                Debug.Log(item.itemId + " find for equip");
                 break;
-                
+
             }
         }
-        Debug.Log(GameService.Instance.catalog.Get(item.itemId).itemId + " = cat");
-        sp.sprite = GameService.Instance.catalog.Get(item.itemId).itemSprite;
+        return sp;
     }
 }

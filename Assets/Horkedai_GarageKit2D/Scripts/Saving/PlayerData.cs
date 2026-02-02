@@ -48,6 +48,28 @@ public class PlayerData
         item.Equip(bike.bikeId);
         visual.EquipItem(item);
     }
+    public void UnequipItem(ItemInstance item, BikeVisual visual, BikeData bike = null)
+    {
+        if (bike == null)
+        {
+            bike = GetCurrentBike();
+        }
+        item.Unequip();
+        visual.UnequipItem(item);
+    }
+
+    public List<ItemInstance> GetEquippedItems(BikeData bike)
+    {
+        List<ItemInstance> equippedItems = new List<ItemInstance>();
+        foreach (var item in ownedItems)
+        {
+            if (item.IsEquipped() && item.equippedTo == bike.bikeId)
+            {
+                equippedItems.Add(item);
+            }
+        }
+        return equippedItems;
+    }
 
 
     /*public List<ItemInstance> GetItems(TuningCatalogSO catalog)

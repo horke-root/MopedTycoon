@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 4305638987264420663}
   - component: {fileID: 1517616080812830954}
   - component: {fileID: 6063182146817435625}
+  - component: {fileID: 3435588956342758812}
   m_Layer: 5
   m_Name: ItemInventory
   m_TagString: Untagged
@@ -142,15 +143,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3661445, g: 0.4698113, b: 0.6415094, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 364107152797229367, guid: 165c8d7fbf57b584689851a2fe726d61, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: -6578210934083765288, guid: 12c6f47aca6a9d587985e2c066def064, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -203,6 +204,23 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3435588956342758812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770053240547261818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58b37c3a568d79cc18a07c5e34050724, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryButton
+  bgImage: {fileID: 1517616080812830954}
+  iconImage: {fileID: 7139348723142308296}
+  equippedColor: {r: 0.2018512, g: 0.3231043, b: 0.5283019, a: 0}
+  defaultColor: {r: 0.36862746, g: 0.47058824, b: 0.6431373, a: 1}
+  durabilityText: {fileID: 5925196714381427454}
 --- !u!1 &4418853084770111383
 GameObject:
   m_ObjectHideFlags: 0
