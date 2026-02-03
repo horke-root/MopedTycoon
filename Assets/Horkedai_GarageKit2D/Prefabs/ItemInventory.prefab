@@ -218,9 +218,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InventoryButton
   bgImage: {fileID: 1517616080812830954}
   iconImage: {fileID: 7139348723142308296}
-  equippedColor: {r: 0.2018512, g: 0.3231043, b: 0.5283019, a: 0}
+  equippedColor: {r: 0.5104097, g: 0.24038802, b: 0.6981132, a: 1}
   defaultColor: {r: 0.36862746, g: 0.47058824, b: 0.6431373, a: 1}
+  selectedColor: {r: 0.16153437, g: 0.20679331, b: 0.2830189, a: 1}
   durabilityText: {fileID: 5925196714381427454}
+  isSelected: 0
+  cItem:
+    instanceId: 
+    itemId: 
+    slotId: 
+    durability: 0
+    _IsEquipped: 0
+    cost: 0
+    estCost: 0
 --- !u!1 &4418853084770111383
 GameObject:
   m_ObjectHideFlags: 0

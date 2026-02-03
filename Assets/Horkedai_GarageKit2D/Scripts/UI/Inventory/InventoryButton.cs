@@ -9,36 +9,36 @@ public class InventoryButton : MonoBehaviour
     public Image iconImage;
     public Color equippedColor;
     public Color defaultColor = Color.white;
+    public Color selectedColor = Color.gray;
     public Text durabilityText;
 
     private Button button;
-     private int durability;
-    private bool isEquipped;
-    private OfflineSaveSystem save;
-    private ItemInstance cItem;
+    private int durability;
+    public bool isSelected = false;
+    public ItemInstance cItem;
+    private InventoryManagerUI manager;
 
 
 
     void Start()
     {
-        save = new OfflineSaveSystem();
         button = GetComponent<Button>();
         button.onClick.AddListener(OnButtonClick);
 
     }
 
-    public void Init(ItemInstance item)
+    public void Init(ItemInstance item, InventoryManagerUI mgr)
     {
+        manager = mgr;
         TuningCatalogSO catalog = GameService.Instance.catalog;
         TuningItemSO tItem = catalog.Get(item.itemId);
 
         iconImage.sprite = tItem.icon;
-        isEquipped = item.IsEquipped();
         durability = item.durability;
         durabilityText.text = durability.ToString();
-        bgImage.color = isEquipped ? equippedColor : defaultColor;
-
+    
         cItem = item;
+        bgImage.color = CurrentColor();
     }
 
 
@@ -46,21 +46,35 @@ public class InventoryButton : MonoBehaviour
     
     void OnButtonClick()
     {
-        var data = save.Load();
-
-        if (cItem.IsEquipped())
+        isSelected = !isSelected;
+        manager.Select(this);
+        Color color;
+        
+        if (isSelected)
         {
-            data.UnequipItem(cItem, GameService.Instance.bikeVisual);
-        }
-        else
+            color = selectedColor;
+        } else
         {
-            data.EquipItem(cItem, GameService.Instance.bikeVisual);
+            color = CurrentColor();
         }
-
-        isEquipped = !isEquipped;
-        bgImage.color = isEquipped ? equippedColor : defaultColor;
-        save.Save(data);
+        bgImage.color = color;
     }
 
+    public void Deselect()
+    {
+        isSelected = false;
+        bgImage.color = CurrentColor();
+    }
+
+    public Color CurrentColor()
+    {
+        if (cItem.IsEquipped(new OfflineSaveSystem().Load()))
+        {
+            return equippedColor;
+        } 
+        else {
+            return defaultColor;
+        }
+    }
     
 }

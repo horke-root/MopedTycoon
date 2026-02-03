@@ -10,12 +10,12 @@ public class SlotField
     public SpriteRenderer sprite;
 }
 
-
 public class BikeVisual : MonoBehaviour
 {   
     public List<SlotField> slotF = new List<SlotField>();
     public TuningCatalogSO catalogSO;
     
+
     private Dictionary<string, SpriteRenderer> slotRenderers = new Dictionary<string, SpriteRenderer>();
 
     public void Reload()

@@ -45,8 +45,10 @@ public class PlayerData
         {
             bike = GetCurrentBike();
         }
-        item.Equip(bike.bikeId);
-        visual.EquipItem(item);
+        ItemInstance findItem = ownedItems.Find(i => i.instanceId == item.instanceId);
+
+        bike.Equip(findItem);
+        visual.EquipItem(findItem);
     }
     public void UnequipItem(ItemInstance item, BikeVisual visual, BikeData bike = null)
     {
@@ -54,18 +56,28 @@ public class PlayerData
         {
             bike = GetCurrentBike();
         }
-        item.Unequip();
-        visual.UnequipItem(item);
+        ItemInstance findItem = ownedItems.Find(i => i.instanceId == item.instanceId);
+        bike.Unequip(findItem);
+        visual.UnequipItem(findItem);
     }
 
     public List<ItemInstance> GetEquippedItems(BikeData bike)
     {
         List<ItemInstance> equippedItems = new List<ItemInstance>();
+        if (bike == null || bike.equippedItems == null)
+        {
+            return equippedItems;
+        }
+
         foreach (var item in ownedItems)
         {
-            if (item.IsEquipped() && item.equippedTo == bike.bikeId)
+            foreach (var eid in bike.equippedItems)
             {
-                equippedItems.Add(item);
+                if (item.instanceId == eid)
+                {
+                    equippedItems.Add(item);
+                    break;
+                }
             }
         }
         return equippedItems;

@@ -25,6 +25,7 @@ public class Bootstrap : MonoBehaviour
             foreach (var item in defaultLoadoutSO.slots)
             {
                 ItemInstance newItem = new ItemInstance(catalogSO.Get(item.itemId));
+                newItem.durability = Random.Range(50, 80);
                 data.AddItem(newItem);
                 // NEED FIX: change these items to equipped items
                
@@ -35,9 +36,9 @@ public class Bootstrap : MonoBehaviour
 
         Debug.Log("Player data loaded: " + data.ownedItems.Count + " items owned.");
         
-        foreach (var item in data.ownedItems) // Equiping all starting items
+        foreach (var item in data.GetEquippedItems(data.GetCurrentBike()))
         {
-            data.EquipItem(item, GameService.Instance.bikeVisual); // NEED FIX: change to equip only eqiupped items
+            GameService.Instance.bikeVisual.EquipItem(item);
         }
         
 

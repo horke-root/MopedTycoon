@@ -11,8 +11,9 @@ public class ItemInstance
     public string slotId;
 
     public int durability; // current durability
+    public bool _IsEquipped = false;
 
-    public string equippedTo; // the bike this item is equipped to
+    //public string equippedTo; // the bike this item is equipped to
     public int cost; // purchase cost
     public int estCost; // estimated resale cost
 
@@ -36,17 +37,25 @@ public class ItemInstance
         GetEstCost();
     }
 
-    public bool IsEquipped()
+    public bool IsEquipped(PlayerData data)
     {
-        return !string.IsNullOrWhiteSpace(equippedTo);
+        var items = data.GetEquippedItems(data.GetCurrentBike());
+        foreach (var item in items)
+        {
+            if (item.instanceId == this.instanceId)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public void Equip(string vehicleId)
+    /*public void Equip(string vehicleId)
     {
         equippedTo = vehicleId;
     }
     public void Unequip()
     {
         equippedTo = null;
-    }
+    }*/
 }
