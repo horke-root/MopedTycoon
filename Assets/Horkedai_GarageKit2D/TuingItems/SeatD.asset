@@ -15,6 +15,7 @@ MonoBehaviour:
   itemId: seatD
   displayName: Default Seat
   cost: 50
+  mass: 2
   slotId: seat
   icon: {fileID: -7607743430949952430, guid: b18a9157a9f7dc64a8176bae67e9b808, type: 3}
   itemSprite: {fileID: -7607743430949952430, guid: b18a9157a9f7dc64a8176bae67e9b808, type: 3}

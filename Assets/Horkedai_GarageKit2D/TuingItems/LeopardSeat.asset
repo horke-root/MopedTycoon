@@ -15,6 +15,7 @@ MonoBehaviour:
   itemId: seatLeopard
   displayName: Leopard Seat
   cost: 200
+  mass: 2
   slotId: seat
   icon: {fileID: -6620792119245923317, guid: b18a9157a9f7dc64a8176bae67e9b808, type: 3}
   itemSprite: {fileID: -6620792119245923317, guid: b18a9157a9f7dc64a8176bae67e9b808, type: 3}

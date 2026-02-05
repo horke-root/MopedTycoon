@@ -15,6 +15,7 @@ MonoBehaviour:
   itemId: exhaust1
   displayName: Povic Exhaust
   cost: 150
+  mass: 2
   slotId: exhaust
   icon: {fileID: -469581622834174363, guid: b18a9157a9f7dc64a8176bae67e9b808, type: 3}
   itemSprite: {fileID: -469581622834174363, guid: b18a9157a9f7dc64a8176bae67e9b808, type: 3}

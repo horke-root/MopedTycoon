@@ -30,8 +30,13 @@ public class BikeData
 
     public void Equip(ItemInstance item)
     {
-        equippedItems.Add(item.instanceId);
-        item._IsEquipped = true;
+        if (item.isEquippedOnBike(this) == false) 
+        {
+            equippedItems.Add(item.instanceId);
+            item._IsEquipped = true;
+        }
+        
+        
     }
 
     public void Unequip(ItemInstance item)
@@ -39,4 +44,35 @@ public class BikeData
         item._IsEquipped = false;
         equippedItems.Remove(item.instanceId);
     }
+
+    public float GetCurrentMass(PlayerData playerData)
+    {
+        float mass = 0f;
+        foreach (string itemId in equippedItems)
+        {
+            ItemInstance item = playerData.ownedItems.Find(i => i.instanceId == itemId);
+            if (item == null) continue;
+            if (item.slotId == "frame")
+            {
+                mass += playerData.humanMass - item.mass;
+            } else
+            {
+                mass += item.mass;
+            }
+            
+        }
+        return mass;
+    }
+
+    public int GetEstCost(PlayerData playerData)
+    {
+        int cost = 0;
+        foreach (var itemId in equippedItems)
+        {
+            ItemInstance item = playerData.ownedItems.Find(i => i.instanceId == itemId);
+            if (item == null) continue;
+            cost += item.GetEstCost();
+        }
+        return cost;
+    }   
 }

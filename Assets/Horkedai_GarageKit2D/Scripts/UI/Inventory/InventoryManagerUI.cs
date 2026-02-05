@@ -12,6 +12,10 @@ public class InventoryManagerUI : MonoBehaviour
     public Text globalTitle;
     public Slider durabilityBar;
     public Text itemCostText;
+    public Text itemMassText;
+    public Text estBikeCost;
+    public Text BikeMass;
+    
 
     public GameObject infoPanel;
 
@@ -41,6 +45,7 @@ public class InventoryManagerUI : MonoBehaviour
         globalTitle.text = "";
         durabilityBar.value = 0;
         itemCostText.text = "0";
+        itemMassText.text = "0";
         infoPanel.SetActive(false);
         var data = new OfflineSaveSystem().Load();
         foreach (ItemInstance item in data.ownedItems)
@@ -50,9 +55,21 @@ public class InventoryManagerUI : MonoBehaviour
             button.Init(item, this);
             inventoryItems.Add(itemObj);
         }
+        ReloadBikeInfo();
 
         equipButton.onClick.AddListener(OnEquip);
         unequipButton.onClick.AddListener(OnUnequip);
+
+    }
+
+    private void ReloadBikeInfo()
+    {
+            var data = new OfflineSaveSystem().Load();
+            var bike = data.GetCurrentBike();
+            int estCost = bike.GetEstCost(data);
+            float mass = bike.GetCurrentMass(data);
+            estBikeCost.text = estCost.ToString();
+            BikeMass.text = mass.ToString();
     }
     
     public void Select(InventoryButton button)
@@ -64,12 +81,13 @@ public class InventoryManagerUI : MonoBehaviour
             b.GetComponent<InventoryButton>().Deselect();
         }
 
-
+        
 
 
         globalTitle.text = selectedItem.itemId;
         durabilityBar.value = selectedItem.durability / 100f;
         itemCostText.text = selectedItem.GetEstCost().ToString();
+        itemMassText.text = selectedItem.mass.ToString();
         infoPanel.SetActive(true);
         button.isSelected = true;
     }
@@ -78,6 +96,7 @@ public class InventoryManagerUI : MonoBehaviour
         var data = new OfflineSaveSystem().Load();
         data.EquipItem(selectedItem, GameService.Instance.bikeVisual);
         new OfflineSaveSystem().Save(data);
+        ReloadBikeInfo();
     }
 
     public void OnUnequip()
@@ -85,6 +104,7 @@ public class InventoryManagerUI : MonoBehaviour
         var data = new OfflineSaveSystem().Load();
         data.UnequipItem(selectedItem, GameService.Instance.bikeVisual);
         new OfflineSaveSystem().Save(data);
+        ReloadBikeInfo();
     }
 
 }

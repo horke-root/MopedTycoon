@@ -15,6 +15,7 @@ MonoBehaviour:
   itemId: wheelF
   displayName: Front wheel
   cost: 20
+  mass: 10
   slotId: RWheel
   icon: {fileID: 7649418499455911712, guid: ce62d74891312f847a64bc830d3ba73c, type: 3}
   itemSprite: {fileID: 3226851166767903237, guid: b18a9157a9f7dc64a8176bae67e9b808, type: 3}

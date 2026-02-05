@@ -15,6 +15,7 @@ MonoBehaviour:
   itemId: engine110
   displayName: Engine 110cc
   cost: 200
+  mass: 25
   slotId: engine
   icon: {fileID: -2928517130387867379, guid: b18a9157a9f7dc64a8176bae67e9b808, type: 3}
   itemSprite: {fileID: -2928517130387867379, guid: b18a9157a9f7dc64a8176bae67e9b808, type: 3}

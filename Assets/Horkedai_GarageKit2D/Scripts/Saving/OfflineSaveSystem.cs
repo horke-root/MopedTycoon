@@ -26,6 +26,14 @@ public class OfflineSaveSystem : ISaveRepository
         return JsonUtility.FromJson<PlayerData>(json);
     }
 
+    public void DeleteSave()
+    {
+        if (File.Exists(filePath))
+        {
+            File.Delete(filePath);
+        }
+    }
+
 
     //Old implementation using PlayerPrefs
     

@@ -9,6 +9,7 @@ public class ItemInstance
     public string instanceId; // unique id for this instance
     public string itemId;     // refers to the item definition
     public string slotId;
+    public float mass;
 
     public int durability; // current durability
     public bool _IsEquipped = false;
@@ -30,6 +31,7 @@ public class ItemInstance
         slotId = item.slotId;
         durability = newDurability;
         cost = item.cost;
+        mass = item.mass;
     }
 
     public void Reload() //function for reload all dynamic data
@@ -48,6 +50,11 @@ public class ItemInstance
             }
         }
         return false;
+    }
+    
+    public bool isEquippedOnBike(BikeData bike)
+    {
+        return bike.equippedItems.Contains(this.instanceId);
     }
 
     /*public void Equip(string vehicleId)

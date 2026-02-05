@@ -14,6 +14,8 @@ public class BikeVisual : MonoBehaviour
 {   
     public List<SlotField> slotF = new List<SlotField>();
     public TuningCatalogSO catalogSO;
+
+    private float humanMass = 60f;
     
 
     private Dictionary<string, SpriteRenderer> slotRenderers = new Dictionary<string, SpriteRenderer>();
@@ -46,6 +48,14 @@ public class BikeVisual : MonoBehaviour
     public void EquipItem(ItemInstance item)
     {
         SpriteRenderer sp = FindSlotRenderer(item);
+        var rbI = sp.GetComponent<Rigidbody2D>();
+        if (item.slotId == "frame") 
+        {
+            rbI.mass = humanMass + item.mass;
+        } else
+        {
+            rbI.mass = item.mass;
+        }
         Debug.Log(GameService.Instance.catalog.Get(item.itemId).itemId + " = cat");
         sp.sprite = GameService.Instance.catalog.Get(item.itemId).itemSprite;
     }
@@ -53,13 +63,22 @@ public class BikeVisual : MonoBehaviour
     public void UnequipItem(ItemInstance item)
     {
         SpriteRenderer sp = FindSlotRenderer(item);
+        var rbI = sp.GetComponent<Rigidbody2D>();
+
+        if (item.slotId != "frame") //if all rbs be = 0 bike will fly away
+        {
+            rbI.mass = humanMass;
+        }
+        
         sp.sprite = null;
     }
 
     private SpriteRenderer FindSlotRenderer(ItemInstance item)
     {
+        humanMass = new OfflineSaveSystem().Load().humanMass;
         string itemSlot = item.slotId;
         SpriteRenderer sp = new SpriteRenderer();
+        
         //SpriteRenderer sp = slotRenderers[itemSlot];
         foreach (var s in slotRenderers)
         {

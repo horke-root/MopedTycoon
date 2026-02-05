@@ -7,6 +7,7 @@ public class PlayerData
 {
     public int money;
     public int level;
+    public float humanMass=60f;
     public List<ItemInstance> ownedItems;
     
     public bool defaultSetted = false;

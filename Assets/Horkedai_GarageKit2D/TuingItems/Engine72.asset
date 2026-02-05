@@ -15,6 +15,7 @@ MonoBehaviour:
   itemId: engine72
   displayName: Engine 72cc
   cost: 150
+  mass: 23
   slotId: engine
   icon: {fileID: 5109494644731142933, guid: b18a9157a9f7dc64a8176bae67e9b808, type: 3}
   itemSprite: {fileID: 5109494644731142933, guid: b18a9157a9f7dc64a8176bae67e9b808, type: 3}

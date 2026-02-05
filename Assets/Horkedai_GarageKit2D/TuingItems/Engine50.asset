@@ -15,6 +15,7 @@ MonoBehaviour:
   itemId: engine50
   displayName: Engine 50cc
   cost: 100
+  mass: 22
   slotId: engine
   icon: {fileID: 1709997999179783108, guid: ce62d74891312f847a64bc830d3ba73c, type: 3}
   itemSprite: {fileID: -655829853259327300, guid: b18a9157a9f7dc64a8176bae67e9b808, type: 3}

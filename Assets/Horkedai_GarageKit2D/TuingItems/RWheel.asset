@@ -15,6 +15,7 @@ MonoBehaviour:
   itemId: wheelR
   displayName: Rear Wheel
   cost: 20
+  mass: 10
   slotId: LWheel
   icon: {fileID: 3226851166767903237, guid: b18a9157a9f7dc64a8176bae67e9b808, type: 3}
   itemSprite: {fileID: 6562340012722883117, guid: b18a9157a9f7dc64a8176bae67e9b808, type: 3}

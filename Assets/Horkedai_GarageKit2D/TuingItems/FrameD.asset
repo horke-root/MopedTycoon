@@ -15,6 +15,7 @@ MonoBehaviour:
   itemId: frameD
   displayName: Black Frame
   cost: 100
+  mass: 36
   slotId: frame
   icon: {fileID: -6308953778538497420, guid: ce62d74891312f847a64bc830d3ba73c, type: 3}
   itemSprite: {fileID: 1793245186676358823, guid: b18a9157a9f7dc64a8176bae67e9b808, type: 3}

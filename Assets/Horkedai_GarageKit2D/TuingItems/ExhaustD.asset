@@ -15,6 +15,7 @@ MonoBehaviour:
   itemId: exhaustD
   displayName: Default Exhaust
   cost: 20
+  mass: 4
   slotId: exhaust
   icon: {fileID: 2893352409037100724, guid: b18a9157a9f7dc64a8176bae67e9b808, type: 3}
   itemSprite: {fileID: 2893352409037100724, guid: b18a9157a9f7dc64a8176bae67e9b808, type: 3}

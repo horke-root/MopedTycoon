@@ -9,6 +9,7 @@ public class TuningItemSO : ScriptableObject
     public string displayName;
 
     public int cost;
+    public float mass;
 
     [Header("Tuning Details")]
     public string slotId; // The slotId this item fits into

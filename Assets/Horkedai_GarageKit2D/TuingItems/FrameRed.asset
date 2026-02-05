@@ -15,6 +15,7 @@ MonoBehaviour:
   itemId: frameRed
   displayName: Red Frame
   cost: 100
+  mass: 36
   slotId: frame
   icon: {fileID: -4693194643933965024, guid: b18a9157a9f7dc64a8176bae67e9b808, type: 3}
   itemSprite: {fileID: -4693194643933965024, guid: b18a9157a9f7dc64a8176bae67e9b808, type: 3}

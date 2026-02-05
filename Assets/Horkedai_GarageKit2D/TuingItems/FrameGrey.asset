@@ -15,6 +15,7 @@ MonoBehaviour:
   itemId: frameGrey
   displayName: Grey Frame
   cost: 100
+  mass: 36
   slotId: frame
   icon: {fileID: 7816317578463399583, guid: b18a9157a9f7dc64a8176bae67e9b808, type: 3}
   itemSprite: {fileID: 7816317578463399583, guid: b18a9157a9f7dc64a8176bae67e9b808, type: 3}
