@@ -6,22 +6,27 @@ public class Bootstrap : MonoBehaviour
     public TuningCatalogSO catalogSO;
     public DefaultLoadoutSO defaultLoadoutSO;
     private OfflineSaveSystem _save;
+    //private OfflineSaveSystem _bikes;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         _save = new OfflineSaveSystem();
-        var data = _save.Load();
+        //_bikes = new OfflineSaveSystem("bikesdata.json");
+        
+        var data = _save.Load<PlayerData>();
+        //var bikesData = _bikes.Load<BikesData>();
         
         if (catalogSO == null) // load from GameServices if catalog not setted, optimising for future online
         {
             catalogSO =  GameService.Instance.catalog;
         }
 
-        data.AddBike(new BikeData(defaultLoadoutSO.defaultBikeSO));
+        
         GameService.Instance.bikeVisual.Clear();
 
         if (!data.defaultSetted)
         {
+            data.AddBike(new BikeData(defaultLoadoutSO.defaultBikeSO));
             foreach (var item in defaultLoadoutSO.slots)
             {
                 ItemInstance newItem = new ItemInstance(catalogSO.Get(item.itemId));

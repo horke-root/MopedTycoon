@@ -14,30 +14,42 @@ public class PlayerData
 
     public int currentBike; // number in counts of items in bikes List [like 1 or 0 or mayeb 13]
 
-    public List<BikeData> bikes;
-
+    public List<string> bikes;
+    public PlayerData()
+    {
+        this.money = 100;
+        this.level = 1;
+        ownedItems = new List<ItemInstance>();
+        currentBike = 0;
+        bikes = new List<String>();
+    }
     public PlayerData(int money = 100, int level = 1)
     {
         this.money = money;
         this.level = level;
         ownedItems = new List<ItemInstance>();
         currentBike = 0;
-        bikes = new List<BikeData>();
+        bikes = new List<String>();
     }
 
     public void AddItem(ItemInstance item)
     {
+        //new OfflineSaveSystem("bikesdata.json").Load<BikesData>();
         ownedItems.Add(item);   
     
     }
     public void AddBike(BikeData bike)
     {
-        bikes.Add(bike);
+        var bikesData = new OfflineSaveSystem("bikesdata.json").Load<BikesData>();
+        bikesData.bikes.Add(bike);
+        new OfflineSaveSystem("bikesdata.json").Save(bikesData);
     }
 
     public BikeData GetCurrentBike()
     {
-        return bikes[currentBike];
+        var bikesData = new OfflineSaveSystem("bikesdata.json").Load<BikesData>();
+        Debug.Log("Getting bike at index: " + currentBike + " with name: " + bikesData.bikes[currentBike].bikeName + " from bikesData with total bikes: " + bikesData.bikes.Count);
+        return bikesData.bikes[currentBike];
     }
 
     public void EquipItem(ItemInstance item,  BikeVisual visual, BikeData bike = null)

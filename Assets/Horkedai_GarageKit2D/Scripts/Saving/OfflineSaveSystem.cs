@@ -11,19 +11,19 @@ public class OfflineSaveSystem : ISaveRepository
     }
 
     //New implementation using file system
-    public void Save(PlayerData data)
+    public void Save<T>(T data)
     {
         string json = JsonUtility.ToJson(data, true);
         System.IO.File.WriteAllText(filePath, json);
         Debug.Log(json);
     }
 
-    public PlayerData Load()
+    public T Load<T>() where T : new()
     {
         if (!File.Exists(filePath))
-                return new PlayerData(); // return default data if no save file exists
+                return new T(); // return default data if no save file exists
         string json = File.ReadAllText(filePath);
-        return JsonUtility.FromJson<PlayerData>(json);
+        return JsonUtility.FromJson<T>(json);
     }
 
     public void DeleteSave()

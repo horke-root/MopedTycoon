@@ -75,7 +75,7 @@ public class BikeVisual : MonoBehaviour
 
     private SpriteRenderer FindSlotRenderer(ItemInstance item)
     {
-        humanMass = new OfflineSaveSystem().Load().humanMass;
+        humanMass = new OfflineSaveSystem().Load<PlayerData>().humanMass;
         string itemSlot = item.slotId;
         SpriteRenderer sp = new SpriteRenderer();
         

@@ -20,6 +20,11 @@ public class BikeData
 
     public List<string> equippedItems = new List<string>();
 
+    public void Save() 
+    {
+        new OfflineSaveSystem("bikesdata.json").Load<BikesData>().SaveBike(this);
+    }
+    
     public BikeData(BikeSO bikeSO)
     {
         bikeId = System.Guid.NewGuid().ToString();
@@ -35,6 +40,7 @@ public class BikeData
             equippedItems.Add(item.instanceId);
             item._IsEquipped = true;
         }
+        Save();
         
         
     }
@@ -43,6 +49,7 @@ public class BikeData
     {
         item._IsEquipped = false;
         equippedItems.Remove(item.instanceId);
+        Save();
     }
 
     public float GetCurrentMass(PlayerData playerData)

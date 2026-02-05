@@ -68,7 +68,7 @@ public class InventoryButton : MonoBehaviour
 
     public Color CurrentColor()
     {
-        if (cItem.IsEquipped(new OfflineSaveSystem().Load()))
+        if (cItem.IsEquipped(new OfflineSaveSystem().Load<PlayerData>()))
         {
             return equippedColor;
         } 

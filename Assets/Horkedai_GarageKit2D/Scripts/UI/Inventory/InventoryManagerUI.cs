@@ -47,7 +47,7 @@ public class InventoryManagerUI : MonoBehaviour
         itemCostText.text = "0";
         itemMassText.text = "0";
         infoPanel.SetActive(false);
-        var data = new OfflineSaveSystem().Load();
+        var data = new OfflineSaveSystem().Load<PlayerData>();
         foreach (ItemInstance item in data.ownedItems)
         {
             GameObject itemObj = Instantiate(itemPrefab, content);
@@ -64,7 +64,7 @@ public class InventoryManagerUI : MonoBehaviour
 
     private void ReloadBikeInfo()
     {
-            var data = new OfflineSaveSystem().Load();
+            var data = new OfflineSaveSystem().Load<PlayerData>();
             var bike = data.GetCurrentBike();
             int estCost = bike.GetEstCost(data);
             float mass = bike.GetCurrentMass(data);
@@ -93,7 +93,7 @@ public class InventoryManagerUI : MonoBehaviour
     }
     public void OnEquip()
     {
-        var data = new OfflineSaveSystem().Load();
+        var data = new OfflineSaveSystem().Load<PlayerData>();
         data.EquipItem(selectedItem, GameService.Instance.bikeVisual);
         new OfflineSaveSystem().Save(data);
         ReloadBikeInfo();
@@ -101,7 +101,7 @@ public class InventoryManagerUI : MonoBehaviour
 
     public void OnUnequip()
     {
-        var data = new OfflineSaveSystem().Load();
+        var data = new OfflineSaveSystem().Load<PlayerData>();
         data.UnequipItem(selectedItem, GameService.Instance.bikeVisual);
         new OfflineSaveSystem().Save(data);
         ReloadBikeInfo();
