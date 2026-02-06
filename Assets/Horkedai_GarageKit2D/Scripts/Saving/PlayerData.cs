@@ -96,6 +96,20 @@ public class PlayerData
         return equippedItems;
     }
 
+    public void StartRepairItem(ItemInstance item, long ticks)
+    {
+        ItemInstance findItem = FindItem(item);
+        if (findItem != null && findItem.durability < 100)
+        {
+            findItem.isRepairing = true;
+            findItem.repairStarts = ticks;
+        }
+    }
+
+    public ItemInstance FindItem(ItemInstance item)
+    {
+        return ownedItems.Find(i => i.instanceId == item.instanceId);
+    }
 
     /*public List<ItemInstance> GetItems(TuningCatalogSO catalog)
     {

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -10,6 +11,9 @@ public class Bootstrap : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+
+        
+
         _save = new OfflineSaveSystem();
         //_bikes = new OfflineSaveSystem("bikesdata.json");
         
@@ -30,7 +34,7 @@ public class Bootstrap : MonoBehaviour
             foreach (var item in defaultLoadoutSO.slots)
             {
                 ItemInstance newItem = new ItemInstance(catalogSO.Get(item.itemId));
-                newItem.durability = Random.Range(50, 80);
+                newItem.durability = UnityEngine.Random.Range(50, 80);
                 data.AddItem(newItem);
                 // NEED FIX: change these items to equipped items
                
@@ -45,9 +49,15 @@ public class Bootstrap : MonoBehaviour
         {
             GameService.Instance.bikeVisual.EquipItem(item);
         }
-        
+        //TestCurrentTime();
 
     }
+    private void TestCurrentTime()
+    {
+        DateTime now = NTPTime.Instance.GetCurrentTime();
+        Debug.Log("Current NTP Time: " + now.ToString());
+    }
+
 
     // Update is called once per frame
     void Update()

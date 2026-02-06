@@ -20,6 +20,7 @@ public class SettingManager : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         new OfflineSaveSystem().DeleteSave();
+        new OfflineSaveSystem("bikesdata.json").DeleteSave();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

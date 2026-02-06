@@ -18,6 +18,9 @@ public class ItemInstance
     public int cost; // purchase cost
     public int estCost; // estimated resale cost
 
+    public bool isRepairing = false;
+    public long repairStarts = 0;
+
     public int GetEstCost()
     {
         estCost = (int)(cost * ((float)durability / 100));

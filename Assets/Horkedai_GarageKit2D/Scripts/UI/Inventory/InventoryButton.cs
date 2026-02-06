@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -46,6 +47,10 @@ public class InventoryButton : MonoBehaviour
     
     void OnButtonClick()
     {
+        DateTime now = NTPTime.Instance.GetCurrentTime();
+        Debug.Log("Current NTP Time: " + now.Ticks);
+
+
         isSelected = !isSelected;
         manager.Select(this);
         Color color;

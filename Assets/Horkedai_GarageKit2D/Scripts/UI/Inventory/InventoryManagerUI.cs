@@ -15,6 +15,8 @@ public class InventoryManagerUI : MonoBehaviour
     public Text itemMassText;
     public Text estBikeCost;
     public Text BikeMass;
+    public PartRepair partRepairUI;
+    GameService gs;
     
 
     public GameObject infoPanel;
@@ -30,6 +32,7 @@ public class InventoryManagerUI : MonoBehaviour
     void Start()
     {
         Init();
+        partRepairUI.Init(this);
     }
 
     public void Init()
@@ -48,6 +51,7 @@ public class InventoryManagerUI : MonoBehaviour
         itemMassText.text = "0";
         infoPanel.SetActive(false);
         var data = new OfflineSaveSystem().Load<PlayerData>();
+        partRepairUI.UpdateUI();
         foreach (ItemInstance item in data.ownedItems)
         {
             GameObject itemObj = Instantiate(itemPrefab, content);
@@ -81,7 +85,7 @@ public class InventoryManagerUI : MonoBehaviour
             b.GetComponent<InventoryButton>().Deselect();
         }
 
-        
+        partRepairUI.ChooseItem(new OfflineSaveSystem().Load<PlayerData>().FindItem(selectedItem));
 
 
         globalTitle.text = selectedItem.itemId;
@@ -90,6 +94,8 @@ public class InventoryManagerUI : MonoBehaviour
         itemMassText.text = selectedItem.mass.ToString();
         infoPanel.SetActive(true);
         button.isSelected = true;
+
+        ReloadBikeInfo();
     }
     public void OnEquip()
     {
@@ -105,6 +111,13 @@ public class InventoryManagerUI : MonoBehaviour
         data.UnequipItem(selectedItem, GameService.Instance.bikeVisual);
         new OfflineSaveSystem().Save(data);
         ReloadBikeInfo();
+    }
+
+    public void OnRepair()
+    {
+
+        partRepairUI.Repair();
+        
     }
 
 }
