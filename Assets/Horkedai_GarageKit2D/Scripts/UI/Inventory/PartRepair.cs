@@ -12,6 +12,7 @@ public class PartRepair : MonoBehaviour
 
     private ItemInstance currentItem;
     private InventoryManagerUI inventoryManagerUI;
+    private GameService gs;
 
     public void Init(InventoryManagerUI inventoryManagerUI)
     {
@@ -57,7 +58,6 @@ public class PartRepair : MonoBehaviour
 
     public void Repair()
     {
-        var pData = new OfflineSaveSystem().Load<PlayerData>();
         /*
         if (currentItem == null || currentItem.isRepairing)
             return;
@@ -67,9 +67,14 @@ public class PartRepair : MonoBehaviour
 
         currentItem.isRepairing = true;
         currentItem.repairStarts = NTPTime.Instance.GetCurrentTime().Ticks; */
-        pData.StartRepairItem(currentItem, NTPTime.Instance.GetCurrentTime().Ticks);
-        new OfflineSaveSystem().Save<PlayerData>(pData);
-        currentItem = pData.FindItem(currentItem);
+        if (!gs.Withdraw(repairCost))
+        {
+            return;
+        }
+        
+        gs.playerData.StartRepairItem(currentItem, NTPTime.Instance.GetCurrentTime().Ticks);
+        gs.SavePlayer();
+        currentItem = gs.playerData.FindItem(currentItem);
         UpdateUI();
     }
 
@@ -79,6 +84,7 @@ public class PartRepair : MonoBehaviour
     {
         UpdateUI();
         repairButton.onClick.AddListener(Repair);
+        gs = GameService.Instance;
     }
 
     // Update is called once per frame
@@ -105,10 +111,10 @@ public class PartRepair : MonoBehaviour
     public void RepairFinish()
     {
         if (currentItem.isRepairing) {
-            var data = new OfflineSaveSystem().Load<PlayerData>();
+
             TimeSpan timePassed = GetTimePassed();
             
-            var fItem = data.FindItem(currentItem);
+            var fItem = gs.playerData.FindItem(currentItem);
 
             fItem.isRepairing = false;
             fItem.repairStarts = 0;
@@ -116,7 +122,7 @@ public class PartRepair : MonoBehaviour
             fItem.GetEstCost();
             
 
-            new OfflineSaveSystem().Save<PlayerData>(data);
+            gs.SavePlayer();
 
             UpdateUI();
             //inventoryManagerUI.Init();

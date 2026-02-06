@@ -4,11 +4,16 @@ using UnityEngine;
 public class GameService : MonoBehaviour
 {
     public static GameService Instance;
-    public TextMeshPro moneyText;
+    public TextMeshProUGUI moneyText;
     public OfflineSaveSystem _playerSave;
     public OfflineSaveSystem _bikesSave;
     public PlayerData playerData;
     public BikesData bikesData;
+
+    //Code:
+    public TuningCatalogSO catalog;
+    public BikeVisual bikeVisual;
+
     void Awake()
     {
         _playerSave = new OfflineSaveSystem();
@@ -16,6 +21,8 @@ public class GameService : MonoBehaviour
         
         playerData = _playerSave.Load<PlayerData>();
         bikesData = _bikesSave.Load<BikesData>();
+
+        UpdateMoney();
 
         if (Instance != null && Instance != this)
         {
@@ -32,37 +39,34 @@ public class GameService : MonoBehaviour
         ItemInstance findItem = playerData.ownedItems.Find(i => i.instanceId == item.instanceId);
         bike.Equip(findItem);
         visual.EquipItem(findItem);
-        var bikesData = new OfflineSaveSystem("bikesdata.json").Load<BikesData>();
+        LoadBike();
         bikesData.SaveBike(bike);
-        new OfflineSaveSystem("bikesdata.json").Save(bikesData);
+        SaveBike();
     }
 
-    public PlayerData LoadPlayerData()
-    {
-        playerData = _playerSave.Load<PlayerData>();
-        return playerData;
-    }
-    public void SavePlayerData()
-    {
-        _playerSave.Save(playerData);
-    }
 
     public void SavePlayer()
     {
         _playerSave.Save(playerData);
+        Debug.LogWarning("GameService: Saved");
     }
     public void LoadPlayer()
     {
+        //SavePlayer();  //for safe load, dont forget old settings
         playerData = _playerSave.Load<PlayerData>();
+        Debug.LogWarning("GameService: Loaded");
     }
 
     public void SaveBike()
     {
+        Debug.LogWarning("GameService: Saved");
         _bikesSave.Save(bikesData);
     }
     public void LoadBike()
     {
+        //SaveBike(); //for safe load, dont forget old settings
         bikesData = _bikesSave.Load<BikesData>();
+        Debug.LogWarning("GameService: Loaded");
     }
 
     public void SaveAll()
@@ -77,8 +81,42 @@ public class GameService : MonoBehaviour
         LoadBike();
     }
 
+    /// <summary>
+    /// Знімає гроші з балансу безопасно і обновляючи інтерфейс
+    /// </summary>
+    /// <param name="cost">Скільки знять</param>
+    /// <returns>true = succes, false = unsucces</returns>
 
-    //Code:
-    public TuningCatalogSO catalog;
-    public BikeVisual bikeVisual;
+    public bool Withdraw(int cost) 
+    {
+        if (playerData.money < cost && playerData.money > 0)
+        {
+            return false;
+        }
+        playerData.money = playerData.money - cost;
+        UpdateMoney();
+        return true;
+    }
+
+    /// <summary>
+    /// Додоає гроші в баланс безопасно і обновляючи інтерфейс
+    /// </summary>
+    /// <param name="cost">Скільки добавити</param>
+
+    public void Deposit(int cost)
+    {
+        playerData.money += cost;
+        SavePlayer();
+        UpdateMoney();
+    }
+
+    private void UpdateMoney()
+    {
+        moneyText.text = playerData.money.ToString();
+    }
+
+
+
+
+    
 }

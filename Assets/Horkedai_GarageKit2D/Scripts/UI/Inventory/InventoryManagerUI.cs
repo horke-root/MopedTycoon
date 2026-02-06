@@ -31,8 +31,10 @@ public class InventoryManagerUI : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        gs = GameService.Instance;
         Init();
         partRepairUI.Init(this);
+        
     }
 
     public void Init()
@@ -50,9 +52,9 @@ public class InventoryManagerUI : MonoBehaviour
         itemCostText.text = "0";
         itemMassText.text = "0";
         infoPanel.SetActive(false);
-        var data = new OfflineSaveSystem().Load<PlayerData>();
+        gs.LoadAll();
         partRepairUI.UpdateUI();
-        foreach (ItemInstance item in data.ownedItems)
+        foreach (ItemInstance item in gs.playerData.ownedItems)
         {
             GameObject itemObj = Instantiate(itemPrefab, content);
             InventoryButton button = itemObj.GetComponent<InventoryButton>();
@@ -68,10 +70,9 @@ public class InventoryManagerUI : MonoBehaviour
 
     private void ReloadBikeInfo()
     {
-            var data = new OfflineSaveSystem().Load<PlayerData>();
-            var bike = data.GetCurrentBike();
-            int estCost = bike.GetEstCost(data);
-            float mass = bike.GetCurrentMass(data);
+            var bike = gs.playerData.GetCurrentBike(gs);
+            int estCost = bike.GetEstCost(gs.playerData);
+            float mass = bike.GetCurrentMass(gs.playerData);
             estBikeCost.text = estCost.ToString();
             BikeMass.text = mass.ToString();
     }
@@ -85,7 +86,7 @@ public class InventoryManagerUI : MonoBehaviour
             b.GetComponent<InventoryButton>().Deselect();
         }
 
-        partRepairUI.ChooseItem(new OfflineSaveSystem().Load<PlayerData>().FindItem(selectedItem));
+        partRepairUI.ChooseItem(gs.playerData.FindItem(selectedItem));
 
 
         globalTitle.text = selectedItem.itemId;
@@ -99,17 +100,17 @@ public class InventoryManagerUI : MonoBehaviour
     }
     public void OnEquip()
     {
-        var data = new OfflineSaveSystem().Load<PlayerData>();
-        data.EquipItem(selectedItem, GameService.Instance.bikeVisual);
-        new OfflineSaveSystem().Save(data);
+        
+        gs.playerData.EquipItem(selectedItem, GameService.Instance.bikeVisual, gs);
+        //gs.SaveAll();
         ReloadBikeInfo();
     }
 
     public void OnUnequip()
     {
-        var data = new OfflineSaveSystem().Load<PlayerData>();
-        data.UnequipItem(selectedItem, GameService.Instance.bikeVisual);
-        new OfflineSaveSystem().Save(data);
+
+        gs.playerData.UnequipItem(selectedItem, GameService.Instance.bikeVisual, gs);
+        //gs.SaveAll();
         ReloadBikeInfo();
     }
 

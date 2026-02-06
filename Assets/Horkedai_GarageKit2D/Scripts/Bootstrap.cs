@@ -5,14 +5,22 @@ using UnityEngine;
 public class Bootstrap : MonoBehaviour
 {
     public TuningCatalogSO catalogSO;
+    public GameObject LoadingScreen;
     public DefaultLoadoutSO defaultLoadoutSO;
     private OfflineSaveSystem _save;
+    private GameService gs;
+    private bool timeSynced = false;
+    public int TimeLoadTicksNeeded = 360; // 5 seconds 5*60 fps
+    private int tCount = 0;
+    
     //private OfflineSaveSystem _bikes;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
 
-        
+        LoadingScreen.SetActive(true);
+
+        /*
 
         _save = new OfflineSaveSystem();
         //_bikes = new OfflineSaveSystem("bikesdata.json");
@@ -24,30 +32,32 @@ public class Bootstrap : MonoBehaviour
         {
             catalogSO =  GameService.Instance.catalog;
         }
-
+        */
+        gs = GameService.Instance;
+        gs.LoadAll();
         
         GameService.Instance.bikeVisual.Clear();
 
-        if (!data.defaultSetted)
+        if (!gs.playerData.defaultSetted)
         {
-            data.AddBike(new BikeData(defaultLoadoutSO.defaultBikeSO));
+            gs.playerData.AddBike(new BikeData(defaultLoadoutSO.defaultBikeSO));
             foreach (var item in defaultLoadoutSO.slots)
             {
                 ItemInstance newItem = new ItemInstance(catalogSO.Get(item.itemId));
                 newItem.durability = UnityEngine.Random.Range(50, 80);
-                data.AddItem(newItem);
+                gs.playerData.AddItem(newItem);
                 // NEED FIX: change these items to equipped items
                
             }
-            data.defaultSetted = true;
-            _save.Save(data);
+            gs.playerData.defaultSetted = true;
+            gs.SavePlayer();
         }
 
-        Debug.Log("Player data loaded: " + data.ownedItems.Count + " items owned.");
+        Debug.Log("Player data loaded: " + gs.playerData.ownedItems.Count + " items owned.");
         
-        foreach (var item in data.GetEquippedItems(data.GetCurrentBike()))
+        foreach (var item in gs.playerData.GetEquippedItems(gs.playerData.GetCurrentBike(gs)))
         {
-            GameService.Instance.bikeVisual.EquipItem(item);
+            gs.bikeVisual.EquipItem(item);
         }
         //TestCurrentTime();
 
@@ -60,8 +70,21 @@ public class Bootstrap : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if (NTPTime.Instance.SessionStartTime != null)
+        {
+            if (!timeSynced)
+            {
+                Debug.Log("Game Loaded");
+                LoadingScreen.SetActive(false);
+                timeSynced = true;
+            }
+            
+        } 
+        /*else
+        {
+            if (tCount >= TimeLoadTicksNeeded )
+        }*/
     }
 }

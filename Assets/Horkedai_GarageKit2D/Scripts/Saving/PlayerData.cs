@@ -45,29 +45,28 @@ public class PlayerData
         new OfflineSaveSystem("bikesdata.json").Save(bikesData);
     }
 
-    public BikeData GetCurrentBike()
+    public BikeData GetCurrentBike(GameService gs)
     {
-        var bikesData = new OfflineSaveSystem("bikesdata.json").Load<BikesData>();
-        Debug.Log("Getting bike at index: " + currentBike + " with name: " + bikesData.bikes[currentBike].bikeName + " from bikesData with total bikes: " + bikesData.bikes.Count);
-        return bikesData.bikes[currentBike];
+        Debug.Log("Getting bike at index: " + currentBike + " with name: " + gs.bikesData.bikes[currentBike].bikeName + " from bikesData with total bikes: " + gs.bikesData.bikes.Count);
+        return gs.bikesData.bikes[currentBike];
     }
 
-    public void EquipItem(ItemInstance item,  BikeVisual visual, BikeData bike = null)
+    public void EquipItem(ItemInstance item,  BikeVisual visual, GameService gs, BikeData bike = null)
     {
         if (bike == null)
         {
-            bike = GetCurrentBike();
+            bike = GetCurrentBike(gs);
         }
         ItemInstance findItem = ownedItems.Find(i => i.instanceId == item.instanceId);
 
         bike.Equip(findItem);
         visual.EquipItem(findItem);
     }
-    public void UnequipItem(ItemInstance item, BikeVisual visual, BikeData bike = null)
+    public void UnequipItem(ItemInstance item, BikeVisual visual, GameService gs, BikeData bike = null)
     {
         if (bike == null)
         {
-            bike = GetCurrentBike();
+            bike = GetCurrentBike(gs);
         }
         ItemInstance findItem = ownedItems.Find(i => i.instanceId == item.instanceId);
         bike.Unequip(findItem);

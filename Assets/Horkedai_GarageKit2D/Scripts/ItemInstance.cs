@@ -42,9 +42,9 @@ public class ItemInstance
         GetEstCost();
     }
 
-    public bool IsEquipped(PlayerData data)
+    public bool IsEquipped(PlayerData data, GameService gs)
     {
-        var items = data.GetEquippedItems(data.GetCurrentBike());
+        var items = data.GetEquippedItems(data.GetCurrentBike(gs));
         foreach (var item in items)
         {
             if (item.instanceId == this.instanceId)
